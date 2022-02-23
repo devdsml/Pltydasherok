@@ -15,13 +15,18 @@ auth = dash_auth.BasicAuth(app,USERNAME_PASSWORD_PAIRS)
 server = app.server
 df = pd.read_csv('https://raw.githubusercontent.com/nethajinirmal13/Training-datasets/main/matches.csv')
 df.dropna(subset=['winner'], inplace=True)
-fig1 = px.treemap(df, path=['winner'])
-fig1.update_traces(textinfo = 'label + value')
-
+a=df['winner'].value_counts().head()
+fig1 = px.histogram(df, x=a.index,y=a.values,title='Top 5 Teams based on winning Count',color_discrete_sequence=["indianred"],text_auto=True, labels={'x':'winner', 'y':'Total wins'})
+fig2 = px.treemap(df, path=['player_of_match'])
+fig2.update_traces(textinfo = 'label + value')
 app.layout = html.Div(children=[
     dcc.Graph(
        id='winteam',
        figure=fig1
+    ),
+    dcc.Graph(
+       id='winplyr',
+       figure=fig2
     ),
     dcc.RangeSlider(
         id='range-slider',
