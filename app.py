@@ -20,9 +20,9 @@ fig1 = px.histogram(df, x=a.index,y=a.values,title='Top 5 Teams based on winning
 a=df['player_of_match'].value_counts().head()
 fig2 = px.histogram(df, x=a.index,y=a.values,title='Top 5 Players',color=a.values,text_auto=True, labels={'x':'Player', 'y':'Total wins'})
 dtmp1=df.groupby(['winner'])['win_by_wickets'].sum().sort_values(ascending=False).head(10)
-fig3 = px.bar(dtmp, x=dtmp1.index,y=dtmp1,title='Top 10 Teams based on Win By Wickets',text_auto=True, labels={'x':'Winner', 'y':'Win By Wickets'},color=dtmp1)
+fig3 = px.bar(dtmp1, x=dtmp1.index,y=dtmp1,title='Top 10 Teams based on Win By Wickets',text_auto=True, labels={'x':'Winner', 'y':'Win By Wickets'},color=dtmp1)
 dtmp=df.groupby(['winner'])['win_by_runs'].sum().sort_values(ascending=False).head(10)
-fig4 = px.bar(dtmp, x=dtmp.index,y=dtmp,title='Top 10 Teams based on Win By Runs',text_auto=True, labels={'x':'Winner', 'y':'Win_by_runs'},color=dtmp)
+fig4 = px.bar(dtmp,y=dtmp.index,x=dtmp,title='Top 10 Teams based on Win By Runs',text_auto=True, labels={'x':'Winner', 'y':'Win_by_runs'},color=dtmp)
 app.layout = html.Div(children=[
     dcc.Graph(
        id='winteam',
