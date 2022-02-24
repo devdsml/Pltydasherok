@@ -46,7 +46,10 @@ app.layout = html.Div(children=[
         marks={i:str(i) for i in range(-5, 7)},
         value=[-3, 4]
     ),
-    html.H1(id='product')  # this is the output
+    html.H1(id='product',children='Data Analysis with IPL Datset',
+       style={
+           'textAlign': 'center'
+       })  # this is the output
 ], style={'width':'50%'})
  
 @app.callback(
