@@ -22,8 +22,12 @@ fig2 = px.histogram(df, x=a.index,y=a.values,title='Top 5 Players',color=a.value
 dtmp1=df.groupby(['winner'])['win_by_wickets'].sum().sort_values(ascending=False).head(10)
 fig3 = px.bar(dtmp1, x=dtmp1.index,y=dtmp1,title='Top 10 Teams based on Win By Wickets',text_auto=True, labels={'x':'Winner', 'y':'Win By Wickets'},color=dtmp1)
 dtmp=df.groupby(['winner'])['win_by_runs'].sum().sort_values(ascending=False).head(10)
-fig4 = px.bar(dtmp,y=dtmp.index,x=dtmp,title='Top 10 Teams based on Win By Runs',text_auto=True, labels={'x':'Winner', 'y':'Win_by_runs'},color=dtmp)
+fig4 = px.bar(dtmp,y=dtmp.index,x=dtmp,title='Top 10 Teams based on Win By Runs',text_auto=True, labels={'x':'Win By Runs', 'y':'Winning Team'},color=dtmp)
 app.layout = html.Div(children=[
+  html.H2(children='Data Analysis with IPL Datset',
+       style={
+           'textAlign': 'center'
+       }),
     dcc.Graph(
        id='winteam',
        figure=fig1
@@ -46,10 +50,7 @@ app.layout = html.Div(children=[
         marks={i:str(i) for i in range(-5, 7)},
         value=[-3, 4]
     ),
-    html.H1(id='product',children='Data Analysis with IPL Datset',
-       style={
-           'textAlign': 'center'
-       })  # this is the output
+    html.H1(id='product')  # this is the output
 ], style={'width':'50%'})
  
 @app.callback(
