@@ -34,7 +34,7 @@ fig6= px.sunburst(df, path=['toss_winner', 'winner'],title='Winning probability 
 fig6.update_traces(textinfo="label+percent parent+value")
 
 app.layout = html.Div(children=[
-  html.H2(children='Data Analysis with IPL Datset',style={'textAlign': 'center',color:'red'}),
+  html.H2(children='Data Analysis with IPL Datset',style={'textAlign': 'center'}),
     dcc.Graph(
        id='winteam',
        figure=fig1
