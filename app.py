@@ -26,7 +26,9 @@ dtmp1=df.groupby(['winner'])['win_by_wickets'].sum().sort_values(ascending=False
 fig3 = px.bar(dtmp1, x=dtmp1.index,y=dtmp1,title='Top 10 Teams based on Win By Wickets',text_auto=True, labels={'x':'Winner', 'y':'Win By Wickets'},color_discrete_sequence= px.colors.qualitative.Prism)
 
 dtmp=df.groupby(['winner'])['win_by_runs'].sum().sort_values(ascending=False).head(10)
-fig4 = px.bar(dtmp,y=dtmp.index,x=dtmp,title='Top 10 Teams based on Win By Runs',text_auto=True, labels={'x':'Win By Runs', 'y':'Winning Team'},color=dtmp)
+fig4 = px.bar(dtmp,y=dtmp.index,x=dtmp,title='Top 10 Teams based on Win By Runs',text_auto=True, labels={'x':'Win By Runs', 'y':'Winning Team'},orientation='h')
+fig4.update_layout(yaxis={'categoryorder':'total ascending'})
+
 app.layout = html.Div(children=[
   html.H2(children='Data Analysis with IPL Datset',
        style={
@@ -47,21 +49,12 @@ app.layout = html.Div(children=[
        id='winbrunr',
        figure=fig4
     ),
-    dcc.RangeSlider(
-        id='range-slider',
-        min=-5,
-        max=6,
-        marks={i:str(i) for i in range(-5, 7)},
-        value=[-3, 4]
-    ),
-    html.H1(id='product')  # this is the output
-], style={'width':'50%'})
+    
+   
+])
  
-@app.callback(
-    Output('product', 'children'),
-    [Input('range-slider', 'value')])
-def update_value(value_list):
-    return value_list[0]*value_list[1]
+@app.callback()
+
  
 if __name__ == '__main__':
     app.run_server(debug=True)
