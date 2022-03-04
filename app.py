@@ -29,6 +29,10 @@ dtmp=df.groupby(['winner'])['win_by_runs'].sum().sort_values(ascending=False).he
 fig4 = px.bar(dtmp,y=dtmp.index,x=dtmp,title='Top 10 Teams based on Win By Runs',text_auto=True, labels={'x':'Win By Runs', 'y':'Winning Team'},orientation='h',color_discrete_sequence=px.colors.sequential.RdBu)
 fig4.update_layout(yaxis={'categoryorder':'total ascending'})
 
+fig6= px.sunburst(df, path=['toss_winner', 'winner'],title='Winning probability by Winning Toss')
+
+fig6.update_traces(textinfo="label+percent parent+value")
+
 app.layout = html.Div(children=[
   html.H2(children='Data Analysis with IPL Datset',style={'textAlign': 'center'}),
     dcc.Graph(
@@ -45,7 +49,10 @@ app.layout = html.Div(children=[
     dcc.Graph(
        id='winbrunr',
        figure=fig4
-    ),
+    ),dcc.Graph(
+       id='winprobt',
+       figure=fig6
+    )
     
    
 ])
