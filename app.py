@@ -52,12 +52,21 @@ app.layout = html.Div(children=[
     ),dcc.Graph(
        id='winprobt',
        figure=fig6
-    )
-    
-   
+    ),dcc.Dropdown(['Mumbai Indians', 'Chennai Super Kings', 'Royal Challengers Bangalore'], 'Mumbai Indians', id='baseddown'),
+    dcc.Graph(
+       id='luckyven',
+      )
 ])
 
-
+@app.callback(
+    Output('luckyven','figure'),
+    Input('baseddown', 'value')
+)
+def update_graph(value):
+      df1 = df[df['winner'] ==value]
+      fig5=px.bar(df1,x='venue',title='Luckiest Venue')
+      
+      return fig5
  
 if __name__ == '__main__':
     app.run_server(debug=True)
