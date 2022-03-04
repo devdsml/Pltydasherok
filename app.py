@@ -16,7 +16,9 @@ server = app.server
 df = pd.read_csv('https://raw.githubusercontent.com/nethajinirmal13/Training-datasets/main/matches.csv')
 df.dropna(subset=['winner'], inplace=True)
 a=df['winner'].value_counts().head()
-fig1 = px.histogram(df, x=a.index,y=a.values,title='Top 5 Teams based on winning Count',color_discrete_sequence=["indianred"],text_auto=True, labels={'x':'winner', 'y':'Total wins'})
+fig1 = px.bar(df,y=a.index,x=a.values,title='Top 5 Teams based on Winning Count',text_auto=True, labels={'y':'Winner', 'x':'Total Wins'}, orientation='h',color_discrete_sequence= px.colors.sequential.Plasma)
+fig1.update_layout(yaxis={'categoryorder':'total ascending'})
+
 a=df['player_of_match'].value_counts().head()
 fig2 = px.histogram(df, x=a.index,y=a.values,title='Top 5 Players',color=a.values,text_auto=True, labels={'x':'Player', 'y':'Total wins'})
 dtmp1=df.groupby(['winner'])['win_by_wickets'].sum().sort_values(ascending=False).head(10)
