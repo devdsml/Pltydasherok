@@ -19,10 +19,12 @@ a=df['winner'].value_counts().head()
 fig1 = px.bar(df,y=a.index,x=a.values,title='Top 5 Teams based on Winning Count',text_auto=True, labels={'y':'Winner', 'x':'Total Wins'}, orientation='h',color_discrete_sequence= px.colors.sequential.Plasma)
 fig1.update_layout(yaxis={'categoryorder':'total ascending'})
 
-a=df['player_of_match'].value_counts().head()
-fig2 = px.histogram(df, x=a.index,y=a.values,title='Top 5 Players',color=a.values,text_auto=True, labels={'x':'Player', 'y':'Total wins'})
+a1=df['player_of_match'].value_counts().head(10)
+fig2 = px.bar(df, x=a1.index,y=a1.values,title='Top 10 Players based on Player of Match',text_auto=True, labels={'x':'Player', 'y':'Total wins'},color_discrete_sequence= px.colors.qualitative.Prism)
+
 dtmp1=df.groupby(['winner'])['win_by_wickets'].sum().sort_values(ascending=False).head(10)
 fig3 = px.bar(dtmp1, x=dtmp1.index,y=dtmp1,title='Top 10 Teams based on Win By Wickets',text_auto=True, labels={'x':'Winner', 'y':'Win By Wickets'},color=dtmp1)
+
 dtmp=df.groupby(['winner'])['win_by_runs'].sum().sort_values(ascending=False).head(10)
 fig4 = px.bar(dtmp,y=dtmp.index,x=dtmp,title='Top 10 Teams based on Win By Runs',text_auto=True, labels={'x':'Win By Runs', 'y':'Winning Team'},color=dtmp)
 app.layout = html.Div(children=[
