@@ -52,7 +52,9 @@ app.layout = html.Div(children=[
     ),dcc.Graph(
        id='winprobt',
        figure=fig6
-    ),dcc.Dropdown(['Mumbai Indians', 'Chennai Super Kings', 'Royal Challengers Bangalore'], 'Mumbai Indians', id='baseddown'),
+    ),dcc.Dropdown(['Mumbai Indians','Delhi Capitals','Kolkata Knight Riders','Sunrisers Hyderabad', 'Chennai Super Kings',
+                    'Royal Challengers Bangalore','Kings XI Punjab','Rajasthan Royals','Gujarat Lions','Rising Pune Supergiants'],
+                   'Mumbai Indians', id='baseddown'),
     dcc.Graph(
        id='luckyven',
       )
